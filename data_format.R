@@ -142,3 +142,4 @@ write_rds(mastercl, "cQ/data/mastercl.rds")
 sites <- c("Yahara River at Highway 113","Yahara River at E. Main St.","Sixmile Creek at Highway M","Dorn Creek at Highway M","Pheasant Branch Creek - Main Stem","Pheasant Branch Creek - South Fork")
 siteChoices <- as_tibble(sites) %>%
   rename(Site = value)
+write_rds(siteChoices, "cQ/data/siteChoices.rds")
