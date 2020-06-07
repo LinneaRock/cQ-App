@@ -143,3 +143,10 @@ sites <- c("Yahara River at Highway 113","Yahara River at E. Main St.","Sixmile 
 siteChoices <- as_tibble(sites) %>%
   rename(Site = value)
 write_rds(siteChoices, "cQ/data/siteChoices.rds")
+
+siteChoices <- seq(1:length(levels(mastercl$site)))
+names(mastercl) <- levels(mastercl$site)
+
+write_rds(siteChoices, "cQ/data/siteChoices.rds")
+
+siteChoices
