@@ -27,7 +27,8 @@ ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watersh
                                     ),
                                     
                                     mainPanel(
-                                      plotOutput("trendPlot")
+                                      plotOutput("clPlot"),
+                                      plotOutput("scPlot")
                                     ))),
                          tabPanel("Citations", #second page with citations
                                   
@@ -37,7 +38,7 @@ ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watersh
 
 
 server <- shinyServer(function(input, output, session) {
-  #mastercond <- read_rds("cQ/data/mastercond.rds")
+  mastercond <- read_rds("cQ/data/mastercond.rds")
   mastercl <-read_rds("cQ/data/mastercl.rds")
 
 
@@ -46,20 +47,34 @@ siteSelection <- reactive ({
 })
 
 
-data <- reactive({
+data_cl <- reactive({
   site <- siteSelection()
   
   siteDat <- mastercl %>%
     dplyr::filter(sitename == site)
+  
 })
 
+data_sc <- reactive({
+  site <- siteSelection()
+  
+  siteDat2 <- mastercond %>%
+    dplyr:: filter(sitename == site)
+})
 
-
-output$trendPlot <- renderPlot({
-  siteDat <- data()
+output$clPlot <- renderPlot({
+  siteDat <- data_cl()
   
   qcl(siteDat)
 })
+
+output$scPlot <- renderPlot({
+  siteDat2 <- data_sc()
+  
+  qsc(siteDat2)
+})
+
+
 })
 
 shinyApp(ui, server)
