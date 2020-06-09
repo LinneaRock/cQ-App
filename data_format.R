@@ -134,19 +134,28 @@ write_rds(mastercond, "cQ/data/mastercond.rds")
 
 mastercl <- rbind(YN_cl, YI_cl, SMC_cl, DC_cl, PBMS_cl, PBSF_cl) %>%
   select(ID.x, date, chloride_mgL, discharge) %>%
-  rename(site = ID.x)
+  rename(sitename = ID.x)
 
 write_rds(mastercl, "cQ/data/mastercl.rds")
 
 
-sites <- c("Yahara River at Highway 113","Yahara River at E. Main St.","Sixmile Creek at Highway M","Dorn Creek at Highway M","Pheasant Branch Creek - Main Stem","Pheasant Branch Creek - South Fork")
-siteChoices <- as_tibble(sites) %>%
-  rename(Site = value)
-write_rds(siteChoices, "cQ/data/siteChoices.rds")
-
-#siteChoices <- seq(1:length(levels(mastercl$site)))
-#names(mastercl) <- levels(mastercl$site)
-
+#sites <- c("Yahara River at Highway 113","Yahara River at E. Main St.","Sixmile Creek at Highway M","Dorn Creek at Highway M","Pheasant Branch Creek - Main Stem","Pheasant Branch Creek - South Fork")
+#siteChoices <- as_tibble(sites) %>%
+#  rename(Site = value)
 #write_rds(siteChoices, "cQ/data/siteChoices.rds")
 
+mastercl$sitename <- fct_relevel(mastercl$sitename, "Yahara River at Highway 113")
+siteChoices <- seq(1:length(levels(mastercl$sitename)))
+names(siteChoices) <- levels(mastercl$sitename)
+
+write_rds(siteChoices, "cQ/data/siteChoices.rds")
+
 #siteChoices
+
+#siteChoices <- mastercl %>%
+#  select(sitename) %>%
+#  rename(site = sitename)
+
+#siteChoices <- unique(siteChoices)
+
+#write_rds(siteChoices, "cQ/data/siteChoices.rds")

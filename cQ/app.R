@@ -12,7 +12,7 @@ simpleTheme <- theme_bw()+
 siteChoices <- read_rds("cQ/data/siteChoices.rds")
 
 
-ui <- shinyUI(navbarPage("Upper Yahara River Watershed Chloride and Conductivity Concentration Trends", # page title
+ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watershed", # page title
                          tabPanel("Graphing cQ relationships",
                                   sidebarLayout(
                                     sidebarPanel(
@@ -24,6 +24,7 @@ ui <- shinyUI(navbarPage("Upper Yahara River Watershed Chloride and Conductivity
                                                   choices = siteChoices,
                                                   selected = 1)
                                     ),
+                                    
                                     mainPanel(
                                       plotOutput("trendPlot")
                                     ))),
@@ -35,7 +36,7 @@ ui <- shinyUI(navbarPage("Upper Yahara River Watershed Chloride and Conductivity
 
 
 server <- shinyServer(function(input, output, session) {
-  mastercond <- read_rds("cQ/data/mastercond.rds")
+  #mastercond <- read_rds("cQ/data/mastercond.rds")
   mastercl <-read_rds("cQ/data/mastercl.rds")
 
 
@@ -53,7 +54,7 @@ data <- reactive({
   site <- siteSelection()
   
   siteDat <- mastercl %>%
-    dplyr::filter(site == site)
+    dplyr::filter(site == sitename)
 })
 
 
