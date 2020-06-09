@@ -144,9 +144,9 @@ siteChoices <- as_tibble(sites) %>%
   rename(Site = value)
 write_rds(siteChoices, "cQ/data/siteChoices.rds")
 
-siteChoices <- seq(1:length(levels(mastercl$site)))
-names(mastercl) <- levels(mastercl$site)
+#siteChoices <- seq(1:length(levels(mastercl$site)))
+#names(mastercl) <- levels(mastercl$site)
 
-write_rds(siteChoices, "cQ/data/siteChoices.rds")
+#write_rds(siteChoices, "cQ/data/siteChoices.rds")
 
-siteChoices
+#siteChoices

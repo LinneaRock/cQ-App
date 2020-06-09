@@ -25,7 +25,7 @@ ui <- shinyUI(navbarPage("Upper Yahara River Watershed Chloride and Conductivity
                                                   selected = 1)
                                     ),
                                     mainPanel(
-                                      plotOUtput("trendPlot")
+                                      plotOutput("trendPlot")
                                     ))),
                          tabPanel("Citations", #second page with citations
                                   
@@ -37,13 +37,16 @@ ui <- shinyUI(navbarPage("Upper Yahara River Watershed Chloride and Conductivity
 server <- shinyServer(function(input, output, session) {
   mastercond <- read_rds("cQ/data/mastercond.rds")
   mastercl <-read_rds("cQ/data/mastercl.rds")
+
+
+
+#siteSelection <- reactive({
+#  site <- names(siteChoices)[as.numeric(input$site)]
+#})
+
+siteSelection <- reactive ({
+  site <- siteChoices[input$site]
 })
-
-
-siteSelection <- reactive({
-  site <- names(siteChoices)[as.numeric(input$site)]
-})
-
 
 
 data <- reactive({
@@ -60,4 +63,6 @@ output$trendPlot <- renderPlot({
   
   qcl(siteDat)
 })
+})
 
+shinyApp(ui, server)
