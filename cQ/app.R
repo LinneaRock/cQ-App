@@ -2,6 +2,7 @@
 library(tidyverse)
 library(shiny)
 source("cQ/Functions/qcl.R")
+source("cQ/Functions/qsc.R")
 
 simpleTheme <- theme_bw()+
     theme(panel.grid = element_blank(),
