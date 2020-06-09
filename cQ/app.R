@@ -12,7 +12,7 @@ simpleTheme <- theme_bw()+
 siteChoices <- read_rds("cQ/data/siteChoices.rds")
 
 
-ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watershed", # page title
+ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watershed", 
                          tabPanel("Graphing cQ relationships",
                                   sidebarLayout(
                                     sidebarPanel(
@@ -40,13 +40,8 @@ server <- shinyServer(function(input, output, session) {
   mastercl <-read_rds("cQ/data/mastercl.rds")
 
 
-
-#siteSelection <- reactive({
-#  site <- names(siteChoices)[as.numeric(input$site)]
-#})
-
 siteSelection <- reactive ({
-  site <- siteChoices[input$site]
+  site <- names(siteChoices)[as.numeric(input$site)]
 })
 
 
@@ -54,7 +49,7 @@ data <- reactive({
   site <- siteSelection()
   
   siteDat <- mastercl %>%
-    dplyr::filter(site == sitename)
+    dplyr::filter(sitename == site)
 })
 
 
