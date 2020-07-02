@@ -37,7 +37,8 @@ master <- masterdischarge %>%
          sitename = ifelse(ID == "6MC", "Sixmile Creek at Highway M", sitename),
          sitename = ifelse(ID == "DC", "Dorn Creek at Highway M", sitename),
          sitename = ifelse(ID == "PBMS", "Pheasant Branch Creek - Main Stem", sitename),
-         sitename = ifelse(ID == "PBSF", "Pheasant Branch Creek - South Fork", sitename))
+         sitename = ifelse(ID == "PBSF", "Pheasant Branch Creek - South Fork", sitename)) %>% 
+  filter(date <= "2020-06-18 00:00:00", date >= "2019-12-19 00:00:00")
 
 
 write_rds(master, "C:/Users/linne/Box Sync/cQ-App/cQ/data/master.rds")

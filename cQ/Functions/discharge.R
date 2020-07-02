@@ -1,6 +1,6 @@
 
-discharge <- function(X) {
-  ggplot(X %>% filter(date <= "2020-06-18 00:00:00", date >= "2019-12-19 00:00:00"), aes(date, discharge)) +
+discharge <- function(data) {
+  ggplot(data, aes(date, discharge)) +
     geom_line() +
     labs(y = bquote("Discharge"~(m^3~s^-1)~"\n"), 
          x = "") +
