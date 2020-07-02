@@ -1,6 +1,6 @@
 
-qsc <- function(X) {
-  ggplot(X, aes(discharge, sp.cond)) +
+qsc <- function(data) {
+  ggplot(data %>% drop_na(sp.cond), aes(discharge, sp.cond)) +
     geom_point() +
     geom_smooth(method = "lm", se = FALSE, color = "#F24D29") +
     labs(y = bquote("Specific Conductivity"~(mu~S~cm^-1)~"@ 25"*~degree*C~"\n"), 

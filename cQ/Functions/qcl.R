@@ -1,6 +1,6 @@
 
-qcl <- function(X) {
-  ggplot(X, aes(discharge, chloride_mgL)) +
+qcl <- function(data) {
+  ggplot(data %>% drop_na(chloride_mgL), aes(discharge, chloride_mgL)) +
     geom_point() +
     geom_smooth(method = "lm", se = FALSE, color = "#F24D29") +
     labs(y = bquote("Chloride Concentration"~(mg~L^-1)~"\n"), 
