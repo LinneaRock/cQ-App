@@ -8,7 +8,7 @@ source("cQ/Functions/qsc.R")
 source("cQ/Functions/chloride.R")
 source("cQ/Functions/cond.R")
 source("cQ/Functions/discharge.R")
-
+source("cQ/Functions/prcp.R")
 
 
 
@@ -72,8 +72,8 @@ ui <- shinyUI(navbarPage("Concentration-Discharge Trends in Yahara River Watersh
 
 
 server <- shinyServer(function(input, output, session) {
-  master<- read_rds("cQ/data/master.rds")
-  
+  master <- read_rds("cQ/data/master.rds")
+  precip <- read_rds("cQ/data/precip.rds")
 
 #Page 1 
 siteSelection <- reactive ({
@@ -86,6 +86,10 @@ data <- reactive({
   siteDat <- master %>%
     dplyr::filter(sitename == site)
   
+})
+
+output$precipPlot <- renderPlot({
+   prcp(precip)
 })
 
 output$chloridePlot <- renderPlot({

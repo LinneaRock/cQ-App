@@ -49,3 +49,11 @@ siteChoices <- seq(1:length(levels(master$sitename)))
 names(siteChoices) <- levels(master$sitename)
 
 write_rds(siteChoices, "C:/Users/linne/Box Sync/cQ-App/cQ/data/siteChoices.rds")
+
+precip <- read.csv("Data/2014-2020_Met_Data.csv") %>% 
+  mutate(date = ymd(DATE)) %>%
+  filter(date <= "2020-06-18", date >= "2019-12-19") %>%
+  select(date, PRCP) %>%
+  mutate(PRCP = PRCP * 2.54)
+
+write_rds(precip, "C:/Users/linne/Box Sync/cQ-App/cQ/data/precip.rds")
